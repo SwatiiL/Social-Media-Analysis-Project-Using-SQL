@@ -1,0 +1,261 @@
+create database socialmedia;
+use socialmedia;
+
+#create users table 
+CREATE TABLE Users(
+User_id int(11) primary key not null auto_increment,
+Username varchar(25) not null,
+Full_Name varchar(40) not null,
+Email varchar(50) not null,
+Registration date,
+bio varchar(255)
+);
+
+#inserted values in user table
+INSERT INTO Users(User_id, Username, Full_Name, Email, Registration,bio)
+VALUES
+(1, "swati_14", "Swati Lokare", "swati@gmail.com", "2022-06-14","Creating my own sunshine"),
+(2, "sarita_12", "Sarita Avdut", "Sarita@gmail.com", "2023-02-10","Journey to self discovery"),
+(3, "ritu_13", "Ritu Mandal", "ritu@gmail.com", "2023-05-16","Living Life"),
+(4, "vaishnavi_05", "Vaishanvi Tamhane", "Vaishnavi@yahoo.com", "2021-09-05","Music lover"),
+(5, "reshma_10", "Reshma Jha", "reshma@gmail.com", "2021-02-23","Lets success make noise"),
+(6, "tejas_loop", "Tejas Ananad", "tejas_an@gmail.com", "2019-05-25","Dream chaser"),
+(7, "yash_99", "Yash Shah", "yash99@gmail.com", "2021-04-18","Style has no limit"),
+(8, "prathamesh_88", "Prathamesh Verma", "prathamesh88@gmail.com", "2023-07-29","Making every day count"),
+(9, "pratiksha_bh", "Pratiksha Bhosale", "Pratiksha13@gmail.com", "2023-02-12","Simple girl"),
+(10, "dreamy_max", "Mark Jonas", "mark_jonas@hotmail.com", "2018-05-28","Passionate about myself"),
+(11, "chase_12", "Chahna Thomas", "thomas@gmail.com", "2021-11-26","Bold girl"),
+(12, "the_unicorn", "Sanika Kulkarni", "sanika11@hotmail.com", "2019-12-22","Little unicorn"),
+(13, "sonia_paul", "Sonia Paul", "sonia@gmail.com", "2023-07-07","Fahionista"),
+(14, "nima_bhat", "Nima Bhat", "nima@yahoo.com", "2022-12-09" , "Makeup queen");
+
+select * from users;
+
+#creating message table
+CREATE TABLE Message (
+  message_id INT PRIMARY KEY,
+  sender_id INT,
+  receiver_id INT,
+  Message_text TEXT,
+  Message_date DATETIME,
+  FOREIGN KEY (sender_id) REFERENCES Users(user_id),
+  FOREIGN KEY (receiver_id) REFERENCES Users(user_id)
+);
+
+INSERT INTO Message (message_id, sender_id, receiver_id, Message_text, Message_date)
+VALUES
+  (101, 2, 1, 'hiiii how things going', '2024-01-13 11:45:25'),
+  (102, 1, 2, 'long time no message?', '2024-02-12 12:38:10'),
+  (103, 4, 5, 'hey you are amazing!', '2022-01-14 16:19:00'),
+  (104, 1, 6, 'Infulencer in the form', '2023-09-25 20:40:00'),
+  (105, 3, 1, 'hey where are you?', '2024-02-16 12:10:30'),
+  (106, 1, 8, 'any plans for summer vacation?', '2024-01-19 18:10:44'),
+  (107, 9, 10, 'your fav food?', '2024-01-10 19:30:00'),
+  (108, 1, 6, 'Are you busy?', '2023-01-22 21:14:45'),
+  (109, 7, 11, 'I am going to Germany.', '2022-04-06 12:38:00'),
+  (110, 12, 8, 'Hey! Lets catch up', '2023-12-27 16:30:00'),
+  (111, 13, 14, 'Congratulations for your new job', '2024-04-29 14:40:00');
+  
+  select * from message;
+
+
+#create post table
+CREATE TABLE Posts(
+Post_id int(11) primary key not null,
+User_id int(11) ,
+Posts_text text (300),
+Post_image_URL varchar(200),
+Post_date date,
+Likes_count int,
+Comments_count int,
+shares_count int,
+hashtag_name varchar(60) not null
+);
+
+INSERT INTO Posts( Post_id, User_id, Posts_text, Post_image_URL, Post_date, Likes_count, Comments_count, shares_count,hashtag_name)
+VALUES
+(201, 2, "Its all about the glow", "http://example.com/glow.jpg", "2023-08-01", 600, 450, 29,"#beautiful"),
+(202, 8, "Calmness over chaos", "http://example.com/calm.jpg", "2024-01-26", 690,360,90,"#Pretty"),
+(203, 1, "Beautiful sunset!", "http://example.com/sunset.jpg", "2023-12-01", 900, 880, 555,"#travel"),
+(204, 3, "Exploring mountains", "http://example.com/mountain.jpg", "2023-10-19", 456,359,90,"#explore"),
+(205, 4, "To glam", "http://example.com/glam.jpg", "2021-09-27", 290, 79, 300,"#selfdevelopement"),
+(206, 5, "Confidence is superpower", "http://example.com/power.jpg", "2022-09-30", 688, 80 , 800,"#treditional"),
+(207, 7, "Trip to remember", "http://example.com/trip.jpg", "2022-09-05", 600, 89, 999,"#nature"),
+(208, 8, "Keep shining", "http://example_live.com/shine.jpg", "2024-02-26", 800, 950, 45,"#sunset"),
+(209, 10, "Birthdays are best", "http://example.com/birthday.jpg", "2022-02-23", 400, 567, 300,"#birthdayvibes"),
+(210, 6, "My new haircut", "http://example_live.com/hair.jpg", "2020-03-25", 789,678,890,"#newhaircut"),
+(211, 9, "Dance is love", "http://example.com/dance.jpg", "2023-12-09", 100, 179, 678,"#dancer"),
+(212, 10, "Self love", "http://example_live.com/self.jpg", "2021-12-28", 789,455,789,"#fitness"),
+(213, 3, "Learning new skills", "http://example.com/skill.jpg", "2024-02-08", 500, 349, 200,"#education"),
+(214, 12, "Greatful" , "http://example.com/great.jpg", "2020-02-08", 500, 349, 200,"#enjoy"),
+(215, 13, "Everyday is fresh start" , "http://example.com/fresh.jpg", "2024-04-25", 500, 349, 200,"#newbegining"),
+(216, 14, "Positive vibes" , "http://example.com/positive.jpg", "2022-12-25", 500, 349, 200,"#newbegining");
+
+select * from posts;
+
+create table hashtags(hashtag_id int auto_increment primary key,
+hashtag_name varchar(255) unique,
+created_at timestamp default now());
+
+INSERT INTO hashtags(hashtag_id , hashtag_name) VALUES (21,"#beautiful"),
+(22,"#treditional"),
+(23,"#Pretty"),
+(24,"#nature"),
+(25,"#birthdayvibes"),
+(26,"#dancer"),
+(27,"#education"),
+(28,"#fitness"),
+(29,"#sunset"),
+(30,"#enjoy"),
+(31,"#selfdevelopement"),
+(32,"#newhaircut"),
+(33,"#newbegining"),
+(34,"#travel");
+
+select * from hashtags;
+select * from posts;
+select * from message;
+select * from users;
+
+#QUERIES
+
+#UPDATE RECORD 
+
+#Question 1) Update the hashtag for post id 215 and 204 
+update posts set hashtag_name = '#nature'
+where post_id=215;
+
+update posts set hashtag_name = '#beautiful'
+where post_id=204;
+
+select * from posts;
+
+
+#COUNT MIN MAX COMPARISON OPERATOR LIMIT 
+
+#Question 2) Find the total number of i)users ii)Maximum Likes iii) Minimum Comments 
+
+select count(user_id) from users;
+
+#ii)Find maximum likes from posts
+select max(likes_count) from posts;
+
+#ii) Find Minimum Comments from posts
+select min(comments_count) from posts;
+
+
+#LESS than and GREATER than 
+
+#Question 3) Find the posts where likes count is less than comments count
+SELECT * from posts where likes_count < comments_count;
+
+
+#Question 4) Limit 
+SELECT * from users 
+limit 3 offset 3;
+
+#ORDER BY CLAUSE
+
+#Question 5) Find longest bio in users 
+
+SELECT user_id,bio,length(users.bio)AS bio_length from users
+order by bio_length Desc;
+ 
+
+#Question 6) Any specific word in hashtag
+
+SELECT * FROM hashtags 
+WHERE hashtag_name REGEXP'nature|beautiful';
+
+
+SELECT * FROM hashtags
+WHERE hashtag_name LIKE '%day%';
+
+select * from hashtags;
+
+#Question 7) To show the total amount of likes and comments on each posts
+SELECT * FROM Posts CommentsAndLikes
+ORDER BY user_id;
+
+
+#JOINS GROUPBY ORDERBY AND SUBQUERIES 
+
+#Question 8)Find average number of shares and likes
+
+SELECT U.User_id, AVG(shares_count) AS Average_shares,
+AVG(Likes_count) AS Average_Likes
+FROM Users U INNER JOIN POSTS P
+ON U.User_id = P.User_id
+GROUP BY U.User_id;
+
+
+#Question 9) Find maximum number of comments 
+
+SELECT U.User_id, max(comments_count) AS max_comments
+FROM Users U INNER JOIN POSTS P
+ON U.User_id = P.User_id
+GROUP BY U.User_id;
+
+
+#Question 10) Get the complete names of the users whose posts have received the most likes.
+
+SELECT Full_Name, SUM(Likes_count) AS Total_Likes
+  FROM Users U INNER JOIN Posts P
+    ON U.User_id = P.User_id
+      GROUP BY U.User_id
+      ORDER BY Total_Likes DESC;
+      
+  
+  
+#Question 11) Show the 4 post_id, post_text, and the username of the user who made the post with the highest number of shares.
+
+SELECT post_id, Posts_text, Username, Shares_count
+FROM Posts P INNER JOIN Users U
+ON P.User_id = U.User_id
+GROUP BY P.post_id
+ORDER BY Shares_count DESC
+LIMIT 4;
+
+
+#Question 12)Look up the usernames of users who have sent and received messages.
+
+SELECT DISTINCT U.Username
+FROM Users U
+INNER JOIN Posts P ON U.User_id = P.User_id
+WHERE U.User_id IN (
+    SELECT DISTINCT sender_id
+    FROM Message);
+
+
+#Question 13): Determine how many posts in total users who registered in 2022 and received at least one message have made.
+
+SELECT COUNT(P.Post_id) AS Total_Posts
+FROM Users U
+INNER JOIN (SELECT DISTINCT receiver_id
+    FROM Message M
+) DistinctReceivers  ON U.User_id = DistinctReceivers.receiver_id
+INNER JOIN Posts P ON U.User_id = P.User_id
+WHERE YEAR(U.Registration) = 2022;
+
+
+#Question 14) - Find out users whos register date and post date is not similar
+
+SELECT U.User_id, U.Username, U.Full_Name, U.Registration, P.Post_date
+FROM Users U
+INNER JOIN Posts P ON U.User_id = P.User_id
+WHERE DATE(U.Registration) <> DATE(P.Post_date);
+
+
+
+#Question 15 - Find the total number of messages sent by each user. Include users who haven't sent any messages.
+
+SELECT User_id, Username, Full_Name, COUNT(sender_id) AS Total_Message_Sent
+FROM Users U INNER JOIN Message M
+ON U.User_id = M.sender_id
+GROUP BY User_id;
+
+
+select* from hashtags;
+select * from message;
+select * from posts;
+select * from users;
